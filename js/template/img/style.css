@@ -1,0 +1,271 @@
+/* 
+    Document   : style
+    Created on : 23.11.2013
+    Author     : Natalia
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body {
+    margin: 0px;
+    font-family: Arial;
+}
+
+#top {
+    overflow: hidden;
+}
+
+.info {
+    float: right;
+    margin: 25px;
+    font-family: Arial;
+}
+
+.logo {
+    float: left;
+    margin: 50px;
+}
+
+#menu {
+    width: 800px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.menu_item {
+    font-family: Verdana;
+    font-size: 1.5em;
+    color: #771111;
+    margin: 10px 30px;
+    text-decoration: none;
+}
+
+.menu_item:hover {
+    color: #f2b75a;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#main_layout {
+    background: url('back.png') #771111;
+    overflow: hidden; background-attachment: fixed;
+
+}
+#content_layout {
+  width: 1280px;
+  margin: 0 auto;
+}
+.player {
+    color: black;
+}
+.player_list
+{
+	   color: black;
+    font-size: 2.9em;
+text-decoration: underline;
+}
+.player_list:hover {
+    text-decoration: none;
+    color: #f2b75a;
+    cursor: pointer;
+    }
+.firma {
+    color: black;
+    font-size: 1.1em;
+text-decoration: none;
+}
+
+#bottom {
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.copyright {
+    font-family: Arial;
+    font-size: 0.8em;
+}
+
+.block_title {
+    margin: 0px;
+    padding: 10px;
+     font-size: 3em;
+}
+ 
+h2 {
+	margin: 0 auto;
+}
+
+.little_button {
+	 display: block; /*Даёт возможность назначать размеры элементу*/
+   width: 140px;
+   padding: 2px;
+   margin-bottom: 2px;
+   text-align: center;
+   
+   border: 1px solid #000;
+   background-color: #9C9C9C;
+   color: #000;
+   font-style: italic;
+   text-decoration: none;
+   border-radius: 7px;
+   
+}
+ 
+.little_button:hover /*Для подсветки при наведении мыши*/
+{
+   background: #EEE5DE; 
+}
+.big_button
+{
+   display: block; /*Даёт возможность назначать размеры элементу*/
+   width: 150px;
+   padding: 4px;
+   margin-bottom: 2px;
+   text-align: center;
+   
+   border: 1px solid #000;
+   background-color: #9C9C9C;
+   color: #000;
+   font-style: italic;
+   font-weight: bold;
+   text-decoration: none;
+   border-radius: 7px;
+}
+ 
+.big_button:hover /*Для подсветки при наведении мыши*/
+{
+   background: #EEE5DE; 
+}
+/* -----для небольшого увеличения аватарок ------*/
+
+#player_photo { /*Увеличение картинки*/
+    width: 50px;
+    margin: 0 auto;
+  
+}
+
+#increase img{ /* для увеличения картики*/
+    
+    width: 50px;
+    margin: 15px 0;
+    
+     -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+}
+
+#increase img:hover {
+    
+    width: 80px;
+    margin-left: -15px;
+}
+/* ---блок увеличения аватарок (размером 50 пкс) завершен--*/
+.history_name
+{
+    padding: 0 0 0 2%;
+    color: black;
+    style=cursor: hand;
+    onClick="location=''";
+    font-family: 'Arial'; /* Гарнитура текста */ 
+    font-size: 13pt; /* Размер шрифта в процентах */ 
+}
+.history_photo
+{
+    width: 100%;
+    height: 10%;
+}
+.history_photo:hover {
+    text-decoration: none;
+    color: #f2b75a;
+    cursor: pointer;
+}
+.history_firm
+{
+    color: black;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-decoration: none;
+}
+.block {
+    padding: 5px;
+    border-radius: 5px;
+}
+/*кнопка наверх*/
+/*#back-top {
+    border-radius: 7px;
+    border:1px solid black;
+ position: fixed;
+ bottom: 30px;
+ margin-left: 90%;
+}
+#back-top a {
+ width: auto;
+ padding: 3px 3px 0px 3px;
+ color: black;
+ display: block;
+ background-color: #ddd;
+ text-align: center;
+ font: 11px/100% Arial, Helvetica, sans-serif;
+
+ text-decoration: none;
+ -webkit-transition: 1s;
+ -moz-transition: 1s;
+ transition: 1s;
+ line-height: 30px;
+ -webkit-border-radius: 7px;
+ border-radius: 7px;
+}
+#back-top a:hover {
+ background-color: #777;
+}*/
+#back-top {
+    clear:both;
+    display:block;
+    padding:0;
+    z-index: 999;
+    border-radius: 7px;
+    border:1px solid black;
+ position: fixed;
+ bottom: 30px;
+ margin-left: 90%;
+}
+
+#back-top a {
+    color:#0662A8;
+    text-shadow:0 -1px 0 #a8d7fb;   
+    border:solid 1px #cad9e0;
+    background: #f6f9fa; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(up.png);
+        /*data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2Y2ZjlmYSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNkYmViZjIiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+*/
+    background: -moz-linear-gradient(top,  #f6f9fa 0%, #dbebf2 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f9fa), color-stop(100%,#dbebf2)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f6f9fa 0%,#dbebf2 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f6f9fa 0%,#dbebf2 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f6f9fa 0%,#dbebf2 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f6f9fa 0%,#dbebf2 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f9fa', endColorstr='#dbebf2',GradientType=0 ); /* IE6-8 */
+    border-radius: 7px;
+    box-shadow: 0 1px 4px #333333;
+    display: block;
+    height: 50px;
+    margin: 0;
+    opacity: 0.5;
+    padding: 0;
+    text-decoration: none;
+    width: 50px;
+}
+#back-top a:focus {
+    outline:medium none;
+}
+#back-top span {
+    /*background: url("../images/sprite_common.png?v=5") -98px -310px no-repeat scroll transparent;*/
+    margin: 17px 13px;
+    display: block;
+    height: 17px;
+    width: 25px;
+}
+#back-top a:hover {
+    opacity: 1;
+    transition:opacity 0.7s ease 0s;
+}
