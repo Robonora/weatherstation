@@ -106,7 +106,7 @@ namespace Meteo.Models
             array.Add("сентябрь", 9);
             array.Add("октябрь", 10);
             array.Add("ноябрь", 11);
-            array.Add("декабрь", 11);
+            array.Add("декабрь", 12);
         }
     }
 }
