@@ -1,0 +1,50 @@
+﻿@model Meteo.Models.Card
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Card</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Temperature)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Temperature)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Air)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Air)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Wind)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Wind)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Charact)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Charact)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

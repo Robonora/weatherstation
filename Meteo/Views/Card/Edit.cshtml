@@ -1,0 +1,69 @@
+﻿@model Meteo.Models.Card
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Card</legend>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateTime)
+            @Html.ValidationMessageFor(model => model.DateTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Temperature)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Temperature)
+            @Html.ValidationMessageFor(model => model.Temperature)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Air)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Air)
+            @Html.ValidationMessageFor(model => model.Air)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Wind)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Wind)
+            @Html.ValidationMessageFor(model => model.Wind)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Charact)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Charact)
+            @Html.ValidationMessageFor(model => model.Charact)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
