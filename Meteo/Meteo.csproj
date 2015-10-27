@@ -129,6 +129,7 @@
     </Compile>
     <Compile Include="Models\CardContext.cs" />
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +225,7 @@
     <Content Include="Views\Card\Edit.cshtml" />
     <Content Include="Views\Card\Delete.cshtml" />
     <Content Include="Views\Card\Insert.cshtml" />
+    <Content Include="Views\Card\GetData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

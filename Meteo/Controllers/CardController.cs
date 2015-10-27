@@ -77,20 +77,64 @@ namespace Meteo.Controllers
                 db.Card.Add(current);
             }
         }
+
+        public JsonCard parsData(Card card){
+            JsonCard cur = new JsonCard();
+            cur.Air = card.Air;
+            cur.Charact = card.Charact;
+            cur.Date = card.DateTime.Day;
+            //cur.Month = Month.array.FirstOrDefault(x => x.Value == card.DateTime.Month).Key;
+            //cur.Month = Month.array.Keys.ElementAt(card.DateTime.Month);
+            //Dictionary<string, int>.ValueCollection collection = Month.array.Values;
+            cur.Month = Month.arraykek[card.DateTime.Month];
+            cur.Time_hour = card.DateTime.Hour;
+            cur.Time_min = card.DateTime.Minute;
+            cur.Temperature = card.Temperature;
+            cur.Wind = card.Wind;
+            return cur;
+        }
+
+        public ActionResult GetData()
+        {
+            if (Month.array.Count() == 0)
+            {
+                Month.FillingMonth();
+                Month.FillingMonthkek();
+            }
+            Package pocket = new Package();
+            pocket.Past = new List<JsonCard>();
+            pocket.All = new List<JsonCard>();
+            pocket.Future = new List<JsonCard>();
+            List<Card> Cards = db.Card.ToList();
+            DateTime Present = Cards[7].DateTime;
+            foreach (var card in Cards) {
+                if(card.DateTime < Present){
+                    pocket.Past.Add(parsData(card));
+                }
+                if(card.DateTime == Present)
+                    pocket.All.Add(parsData(card));
+                else
+                    pocket.Future.Add(parsData(card));
+            }
+            return View(pocket);
+        }
         
         public ActionResult Insert()
         {
-            
-            string text = System.IO.File.ReadAllText(@"C:\Users\Akira\Downloads\info.json");
-            if (Month.array.Count()==0)
+
+            string text = System.IO.File.ReadAllText(@"D:\учеба\WeatherStation\WeatherStation\info.json");
+            if (Month.array.Count() == 0)
+            {
                 Month.FillingMonth();
+                Month.FillingMonthkek();
+            }
             Package package = new Package();
             package = JsonConvert.DeserializeObject<Package>(text);
             InsertCard(package.Future);
             InsertCard(package.Past);
             InsertCard(package.All);
             
-            //db.SaveChanges();
+            db.SaveChanges();
             return View();
         }
         //

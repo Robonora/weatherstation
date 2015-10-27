@@ -30,18 +30,7 @@ namespace Meteo.Models
         [Required]
         public string Charact{get;set;}
     }
-    public class Package
-    {
-        [JsonProperty("future")]
-        public List<JsonCard> Future { get; set; }
-        [JsonProperty("past")]
-        public List<JsonCard> Past { get; set; }
-        [JsonProperty("all")]
-        public List<JsonCard> All { get; set; }
-        [JsonProperty("today")]
-        public TodayCard Today { get; set; }
-
-    }
+    
     public class TodayCard {
         [JsonProperty]
         public int time_hour { get; set; }
@@ -93,6 +82,7 @@ namespace Meteo.Models
     public static class Month
     {
         public static Dictionary<string, int> array = new Dictionary<string, int>();
+        public static Dictionary<int, string> arraykek = new Dictionary<int, string>();
         public static void FillingMonth()
         {
             array.Add("январь", 1);
@@ -107,6 +97,21 @@ namespace Meteo.Models
             array.Add("октябрь", 10);
             array.Add("ноябрь", 11);
             array.Add("декабрь", 12);
+        }
+        public static void FillingMonthkek()
+        {
+            arraykek.Add(1, "январь");
+            arraykek.Add(2, "февраль");
+            arraykek.Add(3, "март");
+            arraykek.Add(4, "апрель");
+            arraykek.Add(5, "май");
+            arraykek.Add(6, "июнь");
+            arraykek.Add(7, "июль");
+            arraykek.Add(8, "август");
+            arraykek.Add(9, "сентябрь");
+            arraykek.Add(10, "октябрь");
+            arraykek.Add(11, "ноябрь");
+            arraykek.Add(12, "декабрь");
         }
     }
 }
