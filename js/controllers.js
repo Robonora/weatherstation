@@ -1,23 +1,39 @@
 var weatherApp = angular.module('weatherApp', []);
  
 weatherApp.controller('CanvaCTRL', function($scope,$interval,$http) {	
+	binding_today_graphic($scope, $http);
 	
-	binding($scope, $http);
+	$interval(function () {
+		 Centr( $scope.today_list);
+		 $scope.$apply();
+		 }, 1000, 1, false);//выполнится 1 раз с задержкой 1 секунда
+		 
 	
     $interval(function () {
-		        binding($scope, $http);
+		        Centr( $scope.today_list)
 		        $scope.$apply();
-		    }, 5000, 0, false);//каждые 5 секунд
+		    }, 5000, 0, false);//каждые 5 секунд обновляется бегунок
+
+	
+	$interval(function () {
+				binding_today_graphic($scope, $http)
+		       $scope.$apply();
+	}, 600000, 0, false);//каждые 10 минут обновляются данные для канваса
+
 });
 
 function binding($scope, $http){
 	$http.get('info.json').success(function(data) {
-        $scope.all=data.all;
         $scope.past=data.past;
         $scope.future=data.future;
-       Centr($scope.all);
-})
-}
+	}
+)}
+
+function binding_today_graphic($scope, $http){
+	$http.get('today_graphic.json').success(function(data) {
+        $scope.today_list=data.today_graphic;
+	}
+)}
 
 weatherApp.controller('InfoController', function($scope, $interval, $http){
        //alert('1')
@@ -26,7 +42,7 @@ weatherApp.controller('InfoController', function($scope, $interval, $http){
 		binding($scope, $http);  
         $scope.$apply();
         
-    }, 600000, 0, false);//каждые 10 минут 
+    }, 2400000, 0, false);//каждые 40 минут 
 	
 	$scope.numLimit = 4; 
 		

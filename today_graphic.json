@@ -1,0 +1,156 @@
+﻿{			"future":
+				[{
+					"time_hour": "22",
+					"time_min": "55",
+					"date": "29",
+					"month": "январь",
+					"temperature": "15",
+					"humidity": "60",
+					"wind": "NE",
+					"charact": "rainny"
+				},{
+					"time_hour": "20",
+					"time_min": "25",
+					"date": "24",
+					"month": "январь",
+					"temperature": "0",
+					"humidity": "60",
+					"wind": "NW",
+					"charact": "cloudy2"
+				},{
+					"time_hour": "21",
+					"time_min": "17",
+					"date": "30",
+					"month": "январь",
+					"temperature": "19",
+					"humidity": "60",
+					"wind": "SE",
+					"charact": "sunny"
+				},{
+					"time_hour": "02",
+					"time_min": "04",
+					"date": "29",
+					"month": "январь",
+					"temperature": "05",
+					"humidity": "60",
+					"wind": "S",
+					"charact": "sunny"
+				},{
+					"time_hour": "01",
+					"time_min": "25",
+					"date": "24",
+					"month": "январь",
+					"temperature": "0",
+					"humidity": "60",
+					"wind": "NW",
+					"charact": "cloudy2"
+				}],
+				
+				"past":
+				[{
+					"time_hour": "22",
+					"time_min": "55",
+					"date": "29",
+					"month": "октябрь",
+					"temperature": "15",
+					"humidity": "60",
+					"wind": "NE",
+					"charact": "rainny"
+				},{
+					"time_hour": "20",
+					"time_min": "25",
+					"date": "24",
+					"month": "октябрь",
+					"temperature": "0",
+					"humidity": "60",
+					"wind": "NW",
+					"charact": "cloudy2"
+				},{
+					"time_hour": "21",
+					"time_min": "17",
+					"date": "30",
+					"month": "октябрь",
+					"temperature": "19",
+					"humidity": "60",
+					"wind": "SE",
+					"charact": "sunny"
+				},{
+					"time_hour": "02",
+					"time_min": "04",
+					"date": "29",
+					"month": "октябрь",
+					"temperature": "05",
+					"humidity": "60",
+					"wind": "S",
+					"charact": "sunny"
+				},{
+					"time_hour": "01",
+					"time_min": "25",
+					"date": "24",
+					"month": "октябрь",
+					"temperature": "0",
+					"humidity": "60",
+					"wind": "NW",
+					"charact": "cloudy2"
+				}],
+				
+				"today_graphic":
+				[{
+					"time_hour": 8,
+					"time_min": 10,
+					"temperature": 3
+				
+				},{
+					"time_hour": 18,
+					"time_min": 10,
+					"temperature": 15
+				},{
+					"time_hour": 17,
+					"time_min": 10,
+					"temperature": 3
+				},{
+					"time_hour": 15,
+					"time_min": 10,
+					"temperature": 3
+				},{
+					"time_hour": 14,
+					"time_min": 10,
+					"temperature": 14
+				},{
+					"time_hour": 13,
+					"time_min": 10,
+					"temperature": 3
+				},{
+					"time_hour": 12,
+					"time_min": 10,
+					"temperature": 13
+				},{
+					"time_hour": 11,
+					"time_min": 10,
+					"temperature": 5
+				},{
+					"time_hour": 8,
+					"time_min": 10,
+					"temperature": 8
+				},{
+					"time_hour": 10,
+					"time_min": 10,
+					"temperature": 3
+				},{
+					"time_hour": 9,
+					"time_min": 10,
+					"temperature": 7
+				}],
+				
+				"today":
+				{
+					"temperature": "15",
+					"humidity": "60",
+					"wind_power": "3",
+					"pressure": "345",
+					"radiation": "18",
+					"wind": "NE",
+					"charact": "hazy"
+				}
+				
+}

@@ -33,7 +33,7 @@ function Magic() {
 }
 
 function Centr($list){	
-
+	//	console.log($list[0].temperature)
 	    var wea = document.getElementById('weather');
 		
 		if (wea.getContext) {
@@ -55,6 +55,7 @@ function Centr($list){
 		    	if(arr[i].temperature < min) min = arr[i].temperature;
 		    	else 
 		    		if(arr[i].temperature > max) max = arr[i].temperature;
+				//console.log(arr[i].temperature,arr[i].time_hour )
 		    }
 			
 			if(max<0){
@@ -78,7 +79,7 @@ function Centr($list){
 			
 			WeatherAll(max, min ,ctx, arr, wea.height, wea.width);
 		}
-		Time(ctx, max, min, wea.height, wea.width);
+		Time(ctx,wea.height, wea.width );
 }
 
 function WeatherAll(max, min ,ctx, arr, He, We){
@@ -123,9 +124,9 @@ function WeatherAll(max, min ,ctx, arr, He, We){
 				else y1 =  Math.abs(He - gran_min) - (arr[i].temperature - min - 10)* part;
 			}
 			
-			if(hours == 0) x = 24*We/23 + (We/23)/60*arr[i].time_min - 5*We/23  ;
+			if(arr[i].time_hour >= 0 && arr[i].time_hour <= 3 ) x = (24+arr[i].time_hour)*We/23 + (We/23)/60*arr[i].time_min - 5*We/23  ;
 			else x = arr[i].time_hour * We/23 + arr[i].time_min * (We/23)/60 - 5 * We / 23;
-			
+			 
 			if( arr[i].temperature == 0) ctx.fillRect(x-3, y-3, 6, 6);// вывод точки если температура равна 0
 			else {
 				// вывод столбиков или палочек
@@ -150,17 +151,22 @@ function WeatherAll(max, min ,ctx, arr, He, We){
 }
 
 
- function Time(ctx,max,min,He,We){
+ function Time(ctx, He, We){
 	 
 	var now = new Date();
 	  hours = now.getHours();
 	  minutes = now.getMinutes();
+	  
+	
+	//var wea = document.getElementById('weather');	
+	//var ctx = wea.getContext('2d');
 	
 	  if( hours != 4 && hours != 5 ){
 		  
-		  if(hours == 0) x = 24*We/23 + (We/23)/60*minutes - 5*We/23;
+		  if(hours >= 0 && hours<= 3 ) x = (24 + hours)*We/23 + (We/23)/60*minutes - 5*We/23;
 		  else x = hours*We/23 + (We/23)/60*minutes - 5*We/23;
 		  ctx.beginPath();
+		  
 		  ctx.strokeStyle = 'black';
 		  ctx.fillStyle = 'black';
 		  ctx.textAlign = "center";
@@ -169,23 +175,15 @@ function WeatherAll(max, min ,ctx, arr, He, We){
 	      ctx.moveTo(x,He/5);
 		  ctx.lineTo(x,4*He/5);
 		  
-		  if(max > 0){
-			  if(minutes >= 0 && minutes <=9)ctx.fillText(hours + ":0"+ minutes, x, 10);
-			  else  ctx.fillText(hours + ":"+ minutes, x, 0);
-			  ctx.fillRect(x-6,He/10,12,He/20)
-			  ctx.moveTo(x, 2*He/10);
-			  ctx.lineTo(x + 5, 3*He/20);
-			  ctx.lineTo(x - 5, 3*He/20);
-			  ctx.lineTo(x , 2*He/10);
-		  }
-		  else{
-			  if(minutes >= 0 && minutes <=9)ctx.fillText(hours + ":0"+ minutes, x, 4*He/5 + He/10);
-			  else  ctx.fillText(hours + ":"+ minutes, x, 4*He/5 + He/10);
-			  ctx.fillRect(x-6, 4*He/5 + He/20,12,He/20)
-			  ctx.moveTo(x-6, 4*He/5 +He/20);
-			  ctx.lineTo(x,4*He/5 );
-			  ctx.lineTo(x+6,4*He/5 +He/20 );
-		  }
+
+		  if(minutes >= 0 && minutes <=9)ctx.fillText(hours + ":0"+ minutes, x, 10);
+		  else  ctx.fillText(hours + ":"+ minutes, x, 0);
+		  ctx.fillRect(x-6,He/10,12,He/20)
+		  ctx.moveTo(x, 2*He/10);
+		  ctx.lineTo(x + 5, 3*He/20);
+		  ctx.lineTo(x - 5, 3*He/20);
+		  ctx.lineTo(x , 2*He/10);
+
 		  ctx.fill();
 		  ctx.stroke();
 	  }
