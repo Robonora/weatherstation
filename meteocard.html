@@ -93,7 +93,7 @@
 						<h2>Будущее</h2>
 					</div>
 
-					<div class = "mCustomScrollbar scrolling" data-mcs-theme="minimal-dark" >
+					<div class = "mCustomScrollbar scrolling" id= "scroll" data-mcs-theme="minimal-dark" >
 						<div style="padding-right: 15px; padding-left: 10px" ng-model="numLimit">
 							<pb-weather-cards ng-repeat="day in future | limitTo:numLimit" day="day"></pb-weather-cards>
 						</div>
@@ -106,6 +106,7 @@
 					<div >
 						<h2>Прошлое</h2>	
 					</div> 
+
 					<div class = "mCustomScrollbar scrolling hidden-sm hidden-xs" id="scrolling_past" data-mcs-theme="minimal-dark">
 						<div style="padding-right: 15px; padding-left: 10px" ng-model="numLimit" >
 							<pb-weather-cards ng-repeat="day in past | limitTo:numLimit" day="day"></pb-weather-cards>

@@ -59,21 +59,19 @@ weatherApp.controller('InfoController', function($scope, $interval, $http){
 		btn.classList.add("hidden-sm");
 		btn.classList.add("hidden-xs");
 
-		if($(window).width()<=768) {
-			var el = document.getElementById('scrolling_past');
-			el.classList.add("visible-xs");
-			el.classList.add("visible-sm");
-			el.classList.remove("hidden-xs");
-			el.classList.remove("hidden-sm");
-		}
-		else{
-			var el = document.getElementById('scrolling_past');
-			el.classList.add("visible-sm");
-			el.classList.add("visible-md");
-			el.classList.remove("hidden-md");
-			el.classList.remove("hidden-sm");
-		}
-		loading();
+
+		var el = document.getElementById('scrolling_past');
+		el.classList.add("visible-xs");
+
+		el.classList.remove("hidden-xs");
+
+
+		el.classList.add("visible-sm");
+		el.classList.add("visible-md");
+		el.classList.remove("hidden-md");
+		el.classList.remove("hidden-sm");
+
+		//loading(0);
 	}
 })
 

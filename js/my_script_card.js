@@ -28,8 +28,14 @@ function Magic() {
 		var He =  clientH/3 ;
 		
 		$('#cur-top').css('height', He - 25);
-		//$('#past').css('height', clientH );
-		//1$('.scrolling_past').css('height', clientH * 0.9);
+		
+	$('#scrolling').mCustomScrollbar({
+		advanced:{
+			updateOnContentResize: true
+		}
+	});
+	
+	
 }
 
 function Centr($list){	
@@ -137,8 +143,9 @@ function WeatherAll(max, min ,ctx, arr, He, We){
 				else var hour = hours;
 				
 				ctx.beginPath();
+				ctx.lineWidth = 1;
 				
-				if (time_hour > hour || ( time_hour == hour && arr[i].time_min > minutes ) ){
+				if (arr[i].time_hour > hour || ( arr[i].time_hour == hour && arr[i].time_min > minutes ) ){
 					ctx.lineWidth = 5;
 				}
 
@@ -274,8 +281,9 @@ $(document).ready(function(){
 	Weather();
 	WeatherAll();
 	Time();
-
+	
 });
+
 
 
 		
