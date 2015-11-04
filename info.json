@@ -5,7 +5,7 @@
 					"date": "29",
 					"month": "январь",
 					"temperature": "15",
-					"air": "60",
+					"humidity": "60",
 					"wind": "NE",
 					"charact": "rainny"
 				},{
@@ -14,7 +14,7 @@
 					"date": "24",
 					"month": "январь",
 					"temperature": "0",
-					"air": "60",
+					"humidity": "60",
 					"wind": "NW",
 					"charact": "cloudy2"
 				},{
@@ -23,7 +23,7 @@
 					"date": "30",
 					"month": "январь",
 					"temperature": "19",
-					"air": "60",
+					"humidity": "60",
 					"wind": "SE",
 					"charact": "sunny"
 				},{
@@ -32,7 +32,7 @@
 					"date": "29",
 					"month": "январь",
 					"temperature": "05",
-					"air": "60",
+					"humidity": "60",
 					"wind": "S",
 					"charact": "sunny"
 				},{
@@ -41,7 +41,7 @@
 					"date": "24",
 					"month": "январь",
 					"temperature": "0",
-					"air": "60",
+					"humidity": "60",
 					"wind": "NW",
 					"charact": "cloudy2"
 				}],
@@ -53,7 +53,7 @@
 					"date": "29",
 					"month": "октябрь",
 					"temperature": "15",
-					"air": "60",
+					"humidity": "60",
 					"wind": "NE",
 					"charact": "rainny"
 				},{
@@ -62,7 +62,7 @@
 					"date": "24",
 					"month": "октябрь",
 					"temperature": "0",
-					"air": "60",
+					"humidity": "60",
 					"wind": "NW",
 					"charact": "cloudy2"
 				},{
@@ -71,7 +71,7 @@
 					"date": "30",
 					"month": "октябрь",
 					"temperature": "19",
-					"air": "60",
+					"humidity": "60",
 					"wind": "SE",
 					"charact": "sunny"
 				},{
@@ -80,7 +80,7 @@
 					"date": "29",
 					"month": "октябрь",
 					"temperature": "05",
-					"air": "60",
+					"humidity": "60",
 					"wind": "S",
 					"charact": "sunny"
 				},{
@@ -89,91 +89,27 @@
 					"date": "24",
 					"month": "октябрь",
 					"temperature": "0",
-					"air": "60",
-					"wind": "NW",
-					"charact": "cloudy2"
-				}],
-				"all":
-				[{
-					"time_hour": 8,
-					"time_min": 10,
-					"date": 29,
-					"month": "октябрь",
-					"temperature": 3,
-					"air": "60",
-					"wind": "NE",
-					"charact": "rainny"
-				},{
-					"time_hour": 9,
-					"time_min": 10,
-					"date": 29,
-					"month": "октябрь",
-					"temperature": 7,
-					"air": "60",
-					"wind": "NE",
-					"charact": "rainny"
-				},{
-					"time_hour": 10,
-					"time_min": 10,
-					"date": 29,
-					"month": "октябрь",
-					"temperature": 5,
-					"air": "60",
-					"wind": "NE",
-					"charact": "rainny"
-				},{
-					"time_hour": 11,
-					"time_min": 10,
-					"date": 29,
-					"month": "октябрь",
-					"temperature": 11,
-					"air": "60",
-					"wind": "NE",
-					"charact": "rainny"
-				},{
-					"time_hour": 12,
-					"time_min": 10,
-					"date": 29,
-					"month": "октябрь",
-					"temperature": 13,
-					"air": "60",
-					"wind": "NE",
-					"charact": "rainny"
-				},{
-					"time_hour": 13,
-					"time_min": 55,
-					"date": 29,
-					"month": "октябрь",
-					"temperature": 15,
-					"air": "60",
-					"wind": "NE",
-					"charact": "rainny"
-				},{
-					"time_hour": 14,
-					"time_min": 55,
-					"date": 29,
-					"month": "октябрь",
-					"temperature": 17,
-					"air": 60,
+					"humidity": "60",
 					"wind": "NW",
 					"charact": "cloudy2"
 				}],
 				
+				"today_graphic":
+				[{
+					"time_hour": 8,
+					"time_min": 10,
+					"temperature": 3,
+				}],
+				
 				"today":
 				{
-					"time_hour": "22",
-					"time_min": "55",
-					"date": "04",
-					"month": "октябрь",
 					"temperature": "15",
-					"air": "60",
+					"humidity": "60",
 					"wind_power": "3",
-					"wind_direction": "юго-восточный",
 					"pressure": "345",
 					"radiation": "18",
 					"wind": "NE",
-					"charact": "солнечно",
-					"img": "hazy"
+					"charact": "hazy"
 				}
 				
 }
