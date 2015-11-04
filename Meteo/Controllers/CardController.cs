@@ -70,7 +70,7 @@ namespace Meteo.Controllers
                 current.DateTime = current.DateTime.AddDays(card.Date - current.DateTime.Day);
                 current.DateTime = current.DateTime.AddMonths((Month.array[card.Month]) - current.DateTime.Month);
                 current.DateTime = current.DateTime.AddYears(2015 - current.DateTime.Year);
-                current.Air = card.Air;
+                current.Humidity = card.Humidity;
                 current.Charact = card.Charact;
                 current.Temperature = card.Temperature;
                 current.Wind = card.Wind;
@@ -80,7 +80,7 @@ namespace Meteo.Controllers
 
         public JsonCard parsData(Card card){
             JsonCard cur = new JsonCard();
-            cur.Air = card.Air;
+            cur.Humidity = card.Humidity;
             cur.Charact = card.Charact;
             cur.Date = card.DateTime.Day;
             //cur.Month = Month.array.FirstOrDefault(x => x.Value == card.DateTime.Month).Key;
@@ -103,7 +103,6 @@ namespace Meteo.Controllers
             }
             Package pocket = new Package();
             pocket.Past = new List<JsonCard>();
-            pocket.All = new List<JsonCard>();
             pocket.Future = new List<JsonCard>();
             List<Card> Cards = db.Card.ToList();
             DateTime Present = Cards[7].DateTime;
@@ -111,9 +110,7 @@ namespace Meteo.Controllers
                 if(card.DateTime < Present){
                     pocket.Past.Add(parsData(card));
                 }
-                if(card.DateTime == Present)
-                    pocket.All.Add(parsData(card));
-                else
+                if(card.DateTime > Present)
                     pocket.Future.Add(parsData(card));
             }
             return View(pocket);
@@ -132,7 +129,6 @@ namespace Meteo.Controllers
             package = JsonConvert.DeserializeObject<Package>(text);
             InsertCard(package.Future);
             InsertCard(package.Past);
-            InsertCard(package.All);
             
             db.SaveChanges();
             return View();

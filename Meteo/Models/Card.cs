@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Meteo.Models
 {
@@ -24,30 +25,20 @@ namespace Meteo.Models
         [Required]
         public int Temperature{get;set;}
         [Required]
-        public int Air{get;set;}
+        public int Humidity { get; set; }
         [Required]
         public string Wind { get; set; }
         [Required]
         public string Charact{get;set;}
     }
-    
+
     public class TodayCard {
-        [JsonProperty]
-        public int time_hour { get; set; }
-        [JsonProperty]
-		public int 	time_min { get; set; }
-		[JsonProperty]
-        public int 	date { get; set; }
-		[JsonProperty]	
-        public string month { get; set; }
 		[JsonProperty]
         public int 	temperature { get; set; }
 		[JsonProperty]
-        public int 	air { get; set; }
+        public int 	humidity { get; set; }
 		[JsonProperty]
         public int 	wind_power  { get; set; }
-		[JsonProperty]
-        public string wind_direction { get; set; }
 		[JsonProperty]
         public int 	pressure { get; set; }
 		[JsonProperty]
@@ -56,8 +47,6 @@ namespace Meteo.Models
         public string wind { get; set; }
         [JsonProperty]
         public string charact { get; set; }
-		[JsonProperty]
-        public string 	img  { get; set; }
     }
     [JsonObject]
     public class JsonCard
@@ -72,12 +61,21 @@ namespace Meteo.Models
         public string Month { get; set; }
         [JsonProperty("temperature")]
         public int Temperature { get; set; }
-        [JsonProperty("air")]
-        public int Air { get; set; }
+        [JsonProperty("humidity")]
+        public int Humidity { get; set; }
         [JsonProperty("wind")]
         public string Wind { get; set; }
         [JsonProperty("charact")]
         public string Charact { get; set; }
+    }
+    public class TodayGraphic
+    {
+        [JsonProperty]
+        public int time_hour { get; set; }
+        [JsonProperty]
+        public int time_min { get; set; }
+        [JsonProperty]
+        public int temperature { get; set; }
     }
     public static class Month
     {
@@ -112,6 +110,19 @@ namespace Meteo.Models
             arraykek.Add(10, "октябрь");
             arraykek.Add(11, "ноябрь");
             arraykek.Add(12, "декабрь");
+        }
+    }
+    public class HtmlResult : ActionResult
+    {
+        private string htmlCode;
+        public HtmlResult(string html)
+        {
+            htmlCode = html;
+        }
+        public override void ExecuteResult(ControllerContext context)
+        {
+            string fullHtmlCode =  htmlCode;
+            context.HttpContext.Response.Write(fullHtmlCode);
         }
     }
 }

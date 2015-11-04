@@ -3977,7 +3977,8 @@ function(i, attr) {
 });
 
 // Color Conversion functions from highlightFade
-// By Blair Mitchelmore
+    // By Bl
+Mitchelmore
 // http://jquery.offput.ca/highlightFade/
 
 // Parse strings looking for color tuples [255,255,255]

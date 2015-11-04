@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Meteo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,7 +14,8 @@ namespace Meteo.Controllers
 
         public ActionResult Index()
         {
-            return View();
+             
+            return new HtmlResult("<h2>Привет мир!</h2>");
         }
 
     }
