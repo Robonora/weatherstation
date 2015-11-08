@@ -127,6 +127,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511080919492_Initial.cs" />
+    <Compile Include="Migrations\201511080919492_Initial.Designer.cs">
+      <DependentUpon>201511080919492_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CardContext.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\Package.cs" />
@@ -189,6 +194,12 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <None Include="Properties\PublishProfiles\meteocsu - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\meteocsu - FTP %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\meteocsu - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\meteocsu - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\meteocsu - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\meteocsu - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -232,6 +243,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201511080919492_Initial.resx">
+      <DependentUpon>201511080919492_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

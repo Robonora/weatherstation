@@ -36,13 +36,13 @@ namespace Meteo.Models
 		[JsonProperty]
         public int 	temperature { get; set; }
 		[JsonProperty]
-        public int 	humidity { get; set; }
+        public float humidity { get; set; }
 		[JsonProperty]
         public int 	wind_power  { get; set; }
 		[JsonProperty]
-        public int 	pressure { get; set; }
+        public float pressure { get; set; }
 		[JsonProperty]
-        public int radiation { get; set; }
+        public float radiation { get; set; }
 		[JsonProperty]
         public string wind { get; set; }
         [JsonProperty]

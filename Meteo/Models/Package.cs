@@ -12,10 +12,5 @@ namespace Meteo.Models
         public List<JsonCard> Future { get; set; }
         [JsonProperty("past")]
         public List<JsonCard> Past { get; set; }
-        [JsonProperty("today_graphic")]
-        public TodayGraphic TodayGraphic { get; set; }
-        [JsonProperty("today")]
-        public TodayCard Today { get; set; }
-
     }
 }
