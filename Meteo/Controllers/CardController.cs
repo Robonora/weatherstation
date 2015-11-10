@@ -9,20 +9,23 @@ using Meteo.Models;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using System.Net;
 
 namespace Meteo.Controllers
 {
     public class CardController : Controller
     {
 
-        private CardContext db = new CardContext();
+        private OpenWeatherCardContext db = new OpenWeatherCardContext();
 
         //
         // GET: /Card/
 
         public ActionResult Index()
         {
-            return View(db.Card.ToList());
+            DateTime datatime= DateTime.Now;
+            
+            return View(db.OpenWeatherCards.Where(x => x.DateTime < datatime));
         }
 
         //
@@ -30,7 +33,7 @@ namespace Meteo.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Card card = db.Card.Find(id);
+            OpenWeatherCard card = db.OpenWeatherCards.Find(id);
             if (card == null)
             {
                 return HttpNotFound();
@@ -99,8 +102,8 @@ namespace Meteo.Controllers
         public void InsertCard(List<JsonCard> cards) {
             foreach (var card in cards)
             {
-                Card current = new Card();
-
+                OpenWeatherCard current = new OpenWeatherCard();
+                
                 current.DateTime = current.DateTime.AddSeconds(0);
                 current.DateTime = current.DateTime.AddMinutes(card.Time_min);
                 current.DateTime = current.DateTime.AddHours(card.Time_hour);
@@ -108,26 +111,23 @@ namespace Meteo.Controllers
                 current.DateTime = current.DateTime.AddMonths((Month.array[card.Month]) - current.DateTime.Month);
                 current.DateTime = current.DateTime.AddYears(2015 - current.DateTime.Year);
                 current.Humidity = card.Humidity;
-                current.Charact = card.Charact;
+                current.Description = card.Charact;
                 current.Temperature = card.Temperature;
-                current.Wind = card.Wind;
-                db.Card.Add(current);
+                current.WindDirection = card.Wind;
+                db.OpenWeatherCards.Add(current);
             }
         }
 
-        public JsonCard parsData(Card card){
+        public JsonCard parsData(OpenWeatherCard card){
             JsonCard cur = new JsonCard();
             cur.Humidity = card.Humidity;
-            cur.Charact = card.Charact;
+            cur.Charact = card.Description;
             cur.Date = card.DateTime.Day;
-            //cur.Month = Month.array.FirstOrDefault(x => x.Value == card.DateTime.Month).Key;
-            //cur.Month = Month.array.Keys.ElementAt(card.DateTime.Month);
-            //Dictionary<string, int>.ValueCollection collection = Month.array.Values;
             cur.Month = Month.arraykek[card.DateTime.Month];
             cur.Time_hour = card.DateTime.Hour;
             cur.Time_min = card.DateTime.Minute;
             cur.Temperature = card.Temperature;
-            cur.Wind = card.Wind;
+            cur.Wind = card.WindDirection;
             return cur;
         }
 
@@ -141,7 +141,7 @@ namespace Meteo.Controllers
             Package pocket = new Package();
             pocket.Past = new List<JsonCard>();
             pocket.Future = new List<JsonCard>();
-            List<Card> ListCards = db.Card.ToList();
+            List<OpenWeatherCard> ListCards = db.OpenWeatherCards.ToList();
             DateTime Present = ListCards[4].DateTime;
             foreach (var card in ListCards) {
                 if(card.DateTime < Present){
@@ -169,24 +169,31 @@ namespace Meteo.Controllers
             db.SaveChanges();
             return View();
         }
-        //
-        // GET: /Card/Edit/5
 
-        public ActionResult Edit(int id = 0)
+        public ActionResult OpenWeatherData()
         {
-            Card card = db.Card.Find(id);
-            if (card == null)
+            String urlGetFutureWeather = "http://api.openweathermap.org/data/2.5/forecast?q=Chelyabinsk,us&appid=ffd8265cc29853ce88591619a85d67f5";
+            WebClient client = new WebClient();
+            String jsonStringFutureWeather = client.DownloadString(urlGetFutureWeather);
+            if (jsonStringFutureWeather.Contains("error")) return null;
+            OpenWeatherJson openWeatherJson = new OpenWeatherJson();
+            openWeatherJson = JsonConvert.DeserializeObject<OpenWeatherJson>(jsonStringFutureWeather);
+            List<OpenWeatherCard> openWeatherCards = openWeatherJson.ToCard();
+            foreach (var card in openWeatherCards)
             {
-                return HttpNotFound();
+                OpenWeatherCard openWeatherCard = db.OpenWeatherCards.FirstOrDefault(x=>x.DateTime==card.DateTime);
+                if(openWeatherCard==null)
+                    db.OpenWeatherCards.Add(card);
             }
-            return View(card);
+            db.SaveChanges();
+            return Json(openWeatherCards, JsonRequestBehavior.AllowGet);
         }
 
         //
         // POST: /Card/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Card card)
+        public ActionResult Edit(OpenWeatherCard card)
         {
             if (ModelState.IsValid)
             {
@@ -202,7 +209,7 @@ namespace Meteo.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Card card = db.Card.Find(id);
+            OpenWeatherCard card = db.OpenWeatherCards.Find(id);
             if (card == null)
             {
                 return HttpNotFound();
@@ -212,15 +219,6 @@ namespace Meteo.Controllers
 
         //
         // POST: /Card/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Card card = db.Card.Find(id);
-            db.Card.Remove(card);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {

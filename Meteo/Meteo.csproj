@@ -131,9 +131,21 @@
     <Compile Include="Migrations\201511080919492_Initial.Designer.cs">
       <DependentUpon>201511080919492_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511091602530_OpenWeatherCardContext.cs" />
+    <Compile Include="Migrations\201511091602530_OpenWeatherCardContext.Designer.cs">
+      <DependentUpon>201511091602530_OpenWeatherCardContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511091604585_MeteoStationCardContext.cs" />
+    <Compile Include="Migrations\201511091604585_MeteoStationCardContext.Designer.cs">
+      <DependentUpon>201511091604585_MeteoStationCardContext.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CardContext.cs" />
     <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\DbModels.cs" />
+    <Compile Include="Models\MeteoStationCardContext.cs" />
+    <Compile Include="Models\OpenWeatherCardContext.cs" />
+    <Compile Include="Models\OpenWeatherJson.cs" />
     <Compile Include="Models\Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -231,12 +243,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Card\Index.cshtml" />
-    <Content Include="Views\Card\Details.cshtml" />
-    <Content Include="Views\Card\Create.cshtml" />
-    <Content Include="Views\Card\Edit.cshtml" />
-    <Content Include="Views\Card\Delete.cshtml" />
-    <Content Include="Views\Card\Insert.cshtml" />
-    <Content Include="Views\Card\GetData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -247,6 +253,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511080919492_Initial.resx">
       <DependentUpon>201511080919492_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511091602530_OpenWeatherCardContext.resx">
+      <DependentUpon>201511091602530_OpenWeatherCardContext.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511091604585_MeteoStationCardContext.resx">
+      <DependentUpon>201511091604585_MeteoStationCardContext.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

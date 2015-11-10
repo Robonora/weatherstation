@@ -8,29 +8,6 @@ using System.Web.Mvc;
 
 namespace Meteo.Models
 {
-    public class Card
-    {
-        [Key]
-        public int Id { get; set; }
-        //[JsonProperty("time_hour")]
-        //public int Time_hour {get;set;}
-        //[JsonProperty("time_min")]
-        //public int Time_min {get;set;}
-        //[JsonProperty("date")]
-        //public int Date {get;set;}
-        //[JsonProperty("month")]
-        //public string Month {get;set;}
-        [Required]
-        public DateTime DateTime{get;set;}
-        [Required]
-        public int Temperature{get;set;}
-        [Required]
-        public int Humidity { get; set; }
-        [Required]
-        public string Wind { get; set; }
-        [Required]
-        public string Charact{get;set;}
-    }
 
     public class TodayCard {
 		[JsonProperty]
@@ -62,7 +39,7 @@ namespace Meteo.Models
         [JsonProperty("temperature")]
         public int Temperature { get; set; }
         [JsonProperty("humidity")]
-        public int Humidity { get; set; }
+        public float Humidity { get; set; }
         [JsonProperty("wind")]
         public string Wind { get; set; }
         [JsonProperty("charact")]
