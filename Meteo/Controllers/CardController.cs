@@ -19,6 +19,8 @@ namespace Meteo.Controllers
     {
         private CardContext db = new CardContext();
 
+        public CardController() { }
+
         public ActionResult Index()
         {
             //DateTime datatime= DateTime.Now;
@@ -50,48 +52,52 @@ namespace Meteo.Controllers
             meteoStationCard.Description = "-";
             meteoStationCard.WindDirection = "-";
             meteoStationCard.WindSpeed = 0;
-            db.MeteoStationCards.Add(meteoStationCard);
-            db.SaveChanges();
+            //db.MeteoStationCards.Add(meteoStationCard);
+            //db.SaveChanges();
             return new EmptyResult();//new HtmlResult(data + "<br><br>" + JsonConvert.SerializeObject(todayCard));//Json(todayCard, JsonRequestBehavior.AllowGet).Data);  
         }
 
         public JsonCard OneDay(List<JsonCard> listCard) 
         {
-            JsonCard day = new JsonCard();
-            day.Date = listCard[0].Date;
-            day.Description = listCard[0].Description;
-            day.WindDirection = listCard[0].WindDirection;
-            int maxCountWindDirection = 1;
-            int maxCountDescription = 1;
-            int count = 0;
-            foreach (var card in listCard)
+            if (listCard.Count != 0)
             {
-                day.Humidity += card.Humidity / listCard.Count;
-                day.Temperature += card.Temperature / listCard.Count;
-                foreach (var item in listCard)
+                JsonCard day = new JsonCard();
+                day.Date = listCard[0].Date;
+                day.Description = listCard[0].Description;
+                day.WindDirection = listCard[0].WindDirection;
+                int maxCountWindDirection = 1;
+                int maxCountDescription = 1;
+                int count = 0;
+                foreach (var card in listCard)
                 {
-                    count = 0;
-                    if (item.WindDirection == card.WindDirection)
-                        count++;
+                    day.Humidity += card.Humidity / listCard.Count;
+                    day.Temperature += card.Temperature / listCard.Count;
+                    foreach (var item in listCard)
+                    {
+                        count = 0;
+                        if (item.WindDirection == card.WindDirection)
+                            count++;
+                    }
+                    if (count > maxCountWindDirection)
+                    {
+                        day.WindDirection = card.WindDirection;
+                        maxCountWindDirection = count;
+                    }
+                    foreach (var item in listCard)
+                    {
+                        count = 0;
+                        if (item.Description == card.Description)
+                            count++;
+                    }
+                    if (count > maxCountDescription)
+                    {
+                        day.Description = card.Description;
+                        maxCountDescription = count;
+                    }
                 }
-                if (count > maxCountWindDirection)
-                {
-                    day.WindDirection = card.WindDirection;
-                    maxCountWindDirection = count;
-                }
-                foreach (var item in listCard)
-                {
-                    count = 0;
-                    if (item.Description == card.Description)
-                        count++;
-                }
-                if (count > maxCountDescription)
-                {
-                    day.Description = card.Description;
-                    maxCountDescription = count;
-                }
+                return day;
             }
-            return day;
+            return null;
         }
 
         public ActionResult GetFutureAndPast()
@@ -101,16 +107,16 @@ namespace Meteo.Controllers
             pocket.Future = new List<JsonCard>();
             List<JsonCard> listCard=new List<JsonCard>();
             DateTime present = DateTime.Now;
-            List<OpenWeatherCard> forecastCards=new List<OpenWeatherCard>();
-            forecastCards = db.OpenWeatherCards.Where(x => 
+            DateTime EndDate = DateTime.Now.AddDays(5); /////////////////////////rename
+            List<OpenWeatherCard> forecastCards = db.OpenWeatherCards.Where(x => 
                 x.DateTime.Day!=present.Day &&
                 x.DateTime >= present && 
-                x.DateTime <= x.DateTime.AddDays(5)).ToList();
-            List<MeteoStationCard> historyCards;
-            historyCards= db.MeteoStationCards.Where(x => 
+                x.DateTime <= EndDate).ToList();
+            EndDate = DateTime.Now.AddDays(-5);
+            List<MeteoStationCard> historyCards = db.MeteoStationCards.Where(x => 
                 x.DateTime.Day!=present.Day &&
                 x.DateTime <= present && 
-                x.DateTime > x.DateTime.AddDays(-5)).ToList();
+                x.DateTime > EndDate).ToList();
 
             foreach (var card in forecastCards) 
             {
@@ -123,8 +129,13 @@ namespace Meteo.Controllers
 
             for (var counter = 0; counter < 5; counter++)
             {
-                pocket.Future.Add(OneDay(listCard.Where(x => x.Date == (present.AddDays(counter + 1) + "." + present.Month)).ToList()));
-                pocket.Past.Add(OneDay(listCard.Where(x => x.Date == (present.AddDays(counter - 1) + "." + present.Month)).ToList()));
+                DateTime day = present.AddDays(counter + 1 + counter);
+                JsonCard card = OneDay(listCard.Where(x => x.Date == (present.AddDays(counter + 1 + counter).Day + "." + present.Month)).ToList());
+                if (card!=null)
+                    pocket.Future.Add(card);
+                card = OneDay(listCard.Where(x => x.Date == (present.AddDays(counter - 1-counter).Day + "." + present.Month)).ToList());
+                if (card != null)
+                    pocket.Past.Add(card);
             }
             return Json(pocket,JsonRequestBehavior.AllowGet);
         }
