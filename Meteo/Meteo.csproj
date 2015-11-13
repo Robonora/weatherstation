@@ -127,26 +127,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201511080919492_Initial.cs" />
-    <Compile Include="Migrations\201511080919492_Initial.Designer.cs">
-      <DependentUpon>201511080919492_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511091602530_OpenWeatherCardContext.cs" />
-    <Compile Include="Migrations\201511091602530_OpenWeatherCardContext.Designer.cs">
-      <DependentUpon>201511091602530_OpenWeatherCardContext.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201511091604585_MeteoStationCardContext.cs" />
-    <Compile Include="Migrations\201511091604585_MeteoStationCardContext.Designer.cs">
-      <DependentUpon>201511091604585_MeteoStationCardContext.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CardContext.cs" />
-    <Compile Include="Models\Card.cs" />
+    <Compile Include="Models\JsonObjects.cs" />
     <Compile Include="Models\DbModels.cs" />
-    <Compile Include="Models\MeteoStationCardContext.cs" />
-    <Compile Include="Models\OpenWeatherCardContext.cs" />
     <Compile Include="Models\OpenWeatherJson.cs" />
     <Compile Include="Models\Package.cs" />
+    <Compile Include="Parse\ParserMeteoData.cs" />
+    <Compile Include="Parse\ParserOpenWeatherData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -249,17 +236,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201511080919492_Initial.resx">
-      <DependentUpon>201511080919492_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511091602530_OpenWeatherCardContext.resx">
-      <DependentUpon>201511091602530_OpenWeatherCardContext.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201511091604585_MeteoStationCardContext.resx">
-      <DependentUpon>201511091604585_MeteoStationCardContext.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
