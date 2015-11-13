@@ -14,8 +14,8 @@ namespace Meteo.Controllers
 
         public ActionResult Index()
         {
-             
-            return new HtmlResult("<h2>Привет мир3!</h2>");
+
+            return new EmptyResult();
         }
 
     }

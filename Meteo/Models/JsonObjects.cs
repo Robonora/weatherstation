@@ -26,26 +26,19 @@ namespace Meteo.Models
         public string WindDirection { get; set; }
         [JsonProperty]
         public string Description { get; set; }
-        public HistoryCard ToCard()
+        public JsonTodayCard (HistoryCard card)
         {
-            HistoryCard card = new HistoryCard();
-            card.DateTime = DateTime.Now;
-            card.Temperature = this.Temperature;
-            card.Humidity = this.Humidity;
-            card.Pressure = this.Pressure;
-            card.Radiation = this.Radiation;
-            card.WindDirection = this.WindDirection;
-            card.Description = this.Description;
-            return card;
+            this.Temperature = card.Temperature;
+            this.Humidity = card.Humidity;
+            this.Pressure = card.Pressure;
+            this.Radiation = card.Radiation;
+            this.WindDirection = card.WindDirection;
+            this.Description = card.Description;
         }
     }
     [JsonObject]
     public class JsonCard
     {
-        [JsonProperty("time_hour")]
-        public int Time_hour { get; set; }
-        [JsonProperty("time_min")]
-        public int Time_min { get; set; }
         [JsonProperty("date")]
         public string Date { get; set; }
         [JsonProperty("temperature")]
@@ -62,8 +55,6 @@ namespace Meteo.Models
             this.Humidity = card.Humidity;
             this.Description = card.Description;
             this.Date = card.DateTime.Day+"."+card.DateTime.Month;
-            this.Time_hour = card.DateTime.Hour;
-            this.Time_min = card.DateTime.Minute;
             this.Temperature = card.Temperature;
             this.WindDirection = card.WindDirection;
         }
@@ -72,8 +63,6 @@ namespace Meteo.Models
             this.Humidity = card.Humidity;
             this.Description = card.Description;
             this.Date = card.DateTime.Day + "." + card.DateTime.Month;
-            this.Time_hour = card.DateTime.Hour;
-            this.Time_min = card.DateTime.Minute;
             this.Temperature = card.Temperature;
             this.WindDirection = card.WindDirection;
         }
@@ -87,21 +76,45 @@ namespace Meteo.Models
         public int Time_min { get; set; }
         [JsonProperty]
         public int Temperature { get; set; }
-    }
 
-    //----Для проверок, фигня
-   
-    public class HtmlResult : ActionResult
-    {
-        private string htmlCode;
-        public HtmlResult(string html)
+        public JsonTodayGraphic(ForecastCard card)
         {
-            htmlCode = html;
+            this.Time_hour = card.DateTime.Hour;
+            this.Time_min = card.DateTime.Minute;
+            this.Temperature = card.Temperature;
         }
-        public override void ExecuteResult(ControllerContext context)
+        public JsonTodayGraphic(HistoryCard card)
         {
-            string fullHtmlCode =  htmlCode;
-            context.HttpContext.Response.Write(fullHtmlCode);
+            this.Time_hour = card.DateTime.Hour;
+            this.Time_min = card.DateTime.Minute;
+            this.Temperature = card.Temperature;
+        }
+    }
+    public class PackageTodayGraphicAndToday
+    {
+        [JsonProperty]
+        public JsonTodayCard Today { get; set; }
+        [JsonProperty]
+        public List<JsonTodayGraphic> TodayGraphic { get; set; }
+
+        public PackageTodayGraphicAndToday()
+        {
+            this.TodayGraphic = new List<JsonTodayGraphic>();
+
+        }
+    }
+    public class PackageFutureAndPast
+    {
+        [JsonProperty]
+        public List<JsonCard> Future { get; set; }
+        [JsonProperty]
+        public List<JsonCard> Past { get; set; }
+
+        public PackageFutureAndPast()
+        {
+            this.Past = new List<JsonCard>();
+            this.Future = new List<JsonCard>();
+
         }
     }
 }

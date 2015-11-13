@@ -131,7 +131,6 @@
     <Compile Include="Models\JsonObjects.cs" />
     <Compile Include="Models\DbModels.cs" />
     <Compile Include="Models\OpenWeatherJson.cs" />
-    <Compile Include="Models\Package.cs" />
     <Compile Include="Parse\ParserMeteoData.cs" />
     <Compile Include="Parse\ParserOpenWeatherData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

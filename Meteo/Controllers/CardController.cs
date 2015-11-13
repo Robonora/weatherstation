@@ -23,25 +23,43 @@ namespace Meteo.Controllers
 
         public ActionResult Index()
         {
-            //DateTime datatime= DateTime.Now;
-            //List<ForecastCard> listCards = dbForecast.ForecastCards.ToList();
-            //List<JsonCard> jsonCards=new List<JsonCard>(); 
-            //foreach (var card in listCards)
-            //{               
-            //        jsonCards.Add(new JsonCard(card));
-            //}
-
             return Json(db.ForecastCards.ToList(), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult IndexMeteo()
-        {
-            return Json(db.HistoryCards.ToList(), JsonRequestBehavior.AllowGet);
-        }
 
-
-        public ActionResult GetTodayAndTodayGraphic()
+        public ActionResult GetTodayGraphicAndToday()
         {
-            return View();
+            PackageTodayGraphicAndToday package = new PackageTodayGraphicAndToday();
+            DateTime present = DateTime.Now;
+            DateTime nearestDate = DateTime.Now.AddMinutes(-30);
+            HistoryCard historyCard = db.HistoryCards.FirstOrDefault(x => x.DateTime > nearestDate);
+            List<HistoryCard> historyCardsToday = db.HistoryCards.Where(x => 
+                x.DateTime.Day == present.Day && 
+                x.DateTime.Month==present.Month && 
+                x.DateTime.Year==present.Year).ToList();
+            List<ForecastCard> forecastCardsToday = db.ForecastCards.Where(x => 
+                x.DateTime.Day == present.Day && 
+                x.DateTime.Month == present.Month && 
+                x.DateTime.Year == present.Year).ToList();
+            if (historyCard != null && historyCardsToday.Count != 0)
+            {
+                package.Today = new JsonTodayCard(historyCard);
+                foreach (var card in historyCardsToday)
+                {
+                    package.TodayGraphic.Add(new JsonTodayGraphic(card));
+                }
+            }
+            if (forecastCardsToday.Count != 0)
+            {
+                foreach (var card in forecastCardsToday)
+                {
+                    package.TodayGraphic.Add(new JsonTodayGraphic(card));
+                }
+            }
+            if (package.TodayGraphic.Count != 0)
+            {
+                package.TodayGraphic = package.TodayGraphic.OrderBy(x => x.Time_hour).ThenBy(y => y.Time_min).ToList();
+            }
+            return Json(package, JsonRequestBehavior.AllowGet);
         }
         
         public  ActionResult MeteoData()//string data)
@@ -52,9 +70,9 @@ namespace Meteo.Controllers
             historyCard.Description = "-";
             historyCard.WindDirection = "-";
             historyCard.WindSpeed = 0;
-            //db.HistoryCards.Add(historyCard);
-            //db.SaveChanges();
-            return new EmptyResult();//new HtmlResult(data + "<br><br>" + JsonConvert.SerializeObject(todayCard));//Json(todayCard, JsonRequestBehavior.AllowGet).Data);  
+            db.HistoryCards.Add(historyCard);
+            db.SaveChanges();
+            return RedirectToAction("OpenWeatherData");
         }
 
         public JsonCard OneDay(List<JsonCard> listCard) 
@@ -102,12 +120,10 @@ namespace Meteo.Controllers
 
         public ActionResult GetFutureAndPast()
         {
-            Package pocket = new Package();
-            pocket.Past = new List<JsonCard>();
-            pocket.Future = new List<JsonCard>();
-            List<JsonCard> listCard=new List<JsonCard>();
+            PackageFutureAndPast pocket = new PackageFutureAndPast();
+            List<JsonCard> listOfFutureAndPastCards = new List<JsonCard>();
             DateTime present = DateTime.Now;
-            DateTime EndDate = DateTime.Now.AddDays(5); /////////////////////////rename
+            DateTime EndDate = DateTime.Now.AddDays(5);
             List<ForecastCard> forecastCards = db.ForecastCards.Where(x => 
                 x.DateTime.Day!=present.Day &&
                 x.DateTime >= present && 
@@ -120,20 +136,19 @@ namespace Meteo.Controllers
 
             foreach (var card in forecastCards) 
             {
-                listCard.Add(new JsonCard(card));
+                listOfFutureAndPastCards.Add(new JsonCard(card));
             }
             foreach (var card in historyCards)
             {
-                listCard.Add(new JsonCard(card));
+                listOfFutureAndPastCards.Add(new JsonCard(card));
             }
 
             for (var counter = 0; counter < 5; counter++)
             {
-                DateTime day = present.AddDays(counter + 1 + counter);
-                JsonCard card = OneDay(listCard.Where(x => x.Date == (present.AddDays(counter + 1 + counter).Day + "." + present.Month)).ToList());
+                JsonCard card = OneDay(listOfFutureAndPastCards.Where(x => x.Date == (present.AddDays(counter + 1).Day + "." + present.Month)).ToList());
                 if (card!=null)
                     pocket.Future.Add(card);
-                card = OneDay(listCard.Where(x => x.Date == (present.AddDays(counter - 1-counter).Day + "." + present.Month)).ToList());
+                card = OneDay(listOfFutureAndPastCards.Where(x => x.Date == (present.AddDays(-counter - 1).Day + "." + present.Month)).ToList());
                 if (card != null)
                     pocket.Past.Add(card);
             }
@@ -142,30 +157,23 @@ namespace Meteo.Controllers
 
         public ActionResult OpenWeatherData()
         {
-            List<ForecastCard> forecastCardss = ParserOpenWeatherData.ParseInJson().ToCard();
-            foreach (var card in forecastCardss)
+            List<ForecastCard> forecastCards = ParserOpenWeatherData.ParseInJson().ToCard();
+            foreach (var card in forecastCards)
             {
-                ForecastCard forecastCards = db.ForecastCards.FirstOrDefault(x=>x.DateTime==card.DateTime);
-                if (forecastCards == null)
+                ForecastCard forecastCard = db.ForecastCards.FirstOrDefault(x=>x.DateTime==card.DateTime);
+                if (forecastCard == null)
                     db.ForecastCards.Add(card);
                 else
                 {
-                    forecastCards.Description = card.Description;
-                    forecastCards.Humidity = card.Humidity;
-                    forecastCards.Temperature = card.Temperature;
-                    forecastCards.WindDirection = card.WindDirection;
-                    db.Entry(forecastCards).State = EntityState.Modified;
+                    forecastCard.Description = card.Description;
+                    forecastCard.Humidity = card.Humidity;
+                    forecastCard.Temperature = card.Temperature;
+                    forecastCard.WindDirection = card.WindDirection;
+                    db.Entry(forecastCard).State = EntityState.Modified;
                 }
             }
             db.SaveChanges();
-            //-----
-            List<JsonCard> jsonCards = new List<JsonCard>();
-            foreach (var card in forecastCardss)
-            {
-                jsonCards.Add(new JsonCard(card));
-            }
-            //----- new EmptyResult();
-            return Json(jsonCards, JsonRequestBehavior.AllowGet);
+            return new EmptyResult();
         }
 
         protected override void Dispose(bool disposing)
