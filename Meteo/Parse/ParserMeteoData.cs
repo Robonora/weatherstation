@@ -10,12 +10,12 @@ namespace Meteo.Parse
 {
     public static class ParserMeteoData
     {
-        public static MeteoStationCard ParseInJson(string data)
+        public static HistoryCard ParseInJson(string data)
         {
             string pattern = @"r:[0-9]+\|t:([0-9]+|[0-9]+\.[0-9]+)\|h:([0-9]+|[0-9]+\.[0-9]+)\|pt:([0-9]+|[0-9]+\.[0-9]+)\|p:([0-9]+|[0-9]+\.[0-9]+)\|g:([0-9]+|[0-9]+\.[0-9]+)=";
             string measurement, field;
             int countMeasurement = 0;
-            MeteoStationCard todayCard = new MeteoStationCard() { Temperature = 0, Humidity = 0, Pressure = 0, Radiation = 0 };
+            HistoryCard todayCard = new HistoryCard() { Temperature = 0, Humidity = 0, Pressure = 0, Radiation = 0 };
             Regex regexPackage = new Regex(pattern);
             Regex regexTemperature = new Regex(@"t:([0-9]+\.[0-9]+|[0-9]+)");
             Regex regexHumidity = new Regex(@"h:([0-9]+\.[0-9]+|[0-9]+)");

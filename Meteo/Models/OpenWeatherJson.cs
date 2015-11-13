@@ -13,20 +13,20 @@ namespace Meteo.Models
     {
         [JsonProperty("list")]
         public List<ListWeather> ListWeather { get; set; }
-        public List<OpenWeatherCard> ToCard() {
-            List<OpenWeatherCard> openWeatherCard = new List<OpenWeatherCard>();
+        public List<ForecastCard> ToCard() {
+            List<ForecastCard> forecastCards = new List<ForecastCard>();
             foreach (var weather in this.ListWeather)
             {
-                OpenWeatherCard card=new OpenWeatherCard();
+                ForecastCard card=new ForecastCard();
                 card.DateTime = Convert.ToDateTime(weather.DateTime.Replace("-","."));             
                 weather.Main.KelvinToCelsius();
                 card.Temperature = (int)Convert.ToSingle(weather.Main.Temperature, new CultureInfo("en-US"));               
                 card.Humidity = Convert.ToSingle(weather.Main.Humidity, new CultureInfo("en-US"));
                 card.WindDirection = weather.Wind.DegreeToCardinal();
                 card.Description = weather.Weather[0].Description;
-                openWeatherCard.Add(card);                
+                forecastCards.Add(card);                
             }
-            return openWeatherCard;
+            return forecastCards;
         }
     }
     public class ListWeather

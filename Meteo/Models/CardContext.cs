@@ -6,13 +6,13 @@ using System.Web;
 
 namespace Meteo.Models
 {
-    //public class MeteoStationCardContext : DbContext
+    //public class HistoryCardContext : DbContext
     //{
-    //    public DbSet<MeteoStationCard> MeteoStationCards { get; set; }
+    //    public DbSet<HistoryCard> HistoryCards { get; set; }
     //}
     public class CardContext : DbContext
     {
-        public DbSet<OpenWeatherCard> OpenWeatherCards { get; set; }
-        public DbSet<MeteoStationCard> MeteoStationCards { get; set; }
+        public DbSet<ForecastCard> ForecastCards { get; set; }
+        public DbSet<HistoryCard> HistoryCards { get; set; }
     }
 }

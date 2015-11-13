@@ -24,22 +24,22 @@ namespace Meteo.Controllers
         public ActionResult Index()
         {
             //DateTime datatime= DateTime.Now;
-            //List<OpenWeatherCard> listCards = dbForecast.OpenWeatherCards.ToList();
+            //List<ForecastCard> listCards = dbForecast.ForecastCards.ToList();
             //List<JsonCard> jsonCards=new List<JsonCard>(); 
             //foreach (var card in listCards)
             //{               
             //        jsonCards.Add(new JsonCard(card));
             //}
 
-            return Json(db.OpenWeatherCards.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(db.ForecastCards.ToList(), JsonRequestBehavior.AllowGet);
         }
         public ActionResult IndexMeteo()
         {
-            return Json(db.MeteoStationCards.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(db.HistoryCards.ToList(), JsonRequestBehavior.AllowGet);
         }
 
 
-        public ActionResult GetTodaAndTodayGraphic()
+        public ActionResult GetTodayAndTodayGraphic()
         {
             return View();
         }
@@ -47,12 +47,12 @@ namespace Meteo.Controllers
         public  ActionResult MeteoData()//string data)
         {
             string data = "r:533|t:15.09|h:84.17|pt:19.43|p:983.65|g:10.60=r:470|t:15.08|h:84.22|pt:19.41|p:983.53|g:6.62=r:477|t:15.11|h:84.61|pt:19.41|p:983.61|g:21.19=";  
-            MeteoStationCard meteoStationCard = ParserMeteoData.ParseInJson(data);
-            meteoStationCard.DateTime = DateTime.Now;
-            meteoStationCard.Description = "-";
-            meteoStationCard.WindDirection = "-";
-            meteoStationCard.WindSpeed = 0;
-            //db.MeteoStationCards.Add(meteoStationCard);
+            HistoryCard historyCard = ParserMeteoData.ParseInJson(data);
+            historyCard.DateTime = DateTime.Now;
+            historyCard.Description = "-";
+            historyCard.WindDirection = "-";
+            historyCard.WindSpeed = 0;
+            //db.HistoryCards.Add(historyCard);
             //db.SaveChanges();
             return new EmptyResult();//new HtmlResult(data + "<br><br>" + JsonConvert.SerializeObject(todayCard));//Json(todayCard, JsonRequestBehavior.AllowGet).Data);  
         }
@@ -108,12 +108,12 @@ namespace Meteo.Controllers
             List<JsonCard> listCard=new List<JsonCard>();
             DateTime present = DateTime.Now;
             DateTime EndDate = DateTime.Now.AddDays(5); /////////////////////////rename
-            List<OpenWeatherCard> forecastCards = db.OpenWeatherCards.Where(x => 
+            List<ForecastCard> forecastCards = db.ForecastCards.Where(x => 
                 x.DateTime.Day!=present.Day &&
                 x.DateTime >= present && 
                 x.DateTime <= EndDate).ToList();
             EndDate = DateTime.Now.AddDays(-5);
-            List<MeteoStationCard> historyCards = db.MeteoStationCards.Where(x => 
+            List<HistoryCard> historyCards = db.HistoryCards.Where(x => 
                 x.DateTime.Day!=present.Day &&
                 x.DateTime <= present && 
                 x.DateTime > EndDate).ToList();
@@ -142,25 +142,25 @@ namespace Meteo.Controllers
 
         public ActionResult OpenWeatherData()
         {
-            List<OpenWeatherCard> openWeatherCards = ParserOpenWeatherData.ParseInJson().ToCard();
-            foreach (var card in openWeatherCards)
+            List<ForecastCard> forecastCardss = ParserOpenWeatherData.ParseInJson().ToCard();
+            foreach (var card in forecastCardss)
             {
-                OpenWeatherCard openWeatherCard = db.OpenWeatherCards.FirstOrDefault(x=>x.DateTime==card.DateTime);
-                if (openWeatherCard == null)
-                    db.OpenWeatherCards.Add(card);
+                ForecastCard forecastCards = db.ForecastCards.FirstOrDefault(x=>x.DateTime==card.DateTime);
+                if (forecastCards == null)
+                    db.ForecastCards.Add(card);
                 else
                 {
-                    openWeatherCard.Description = card.Description;
-                    openWeatherCard.Humidity = card.Humidity;
-                    openWeatherCard.Temperature = card.Temperature;
-                    openWeatherCard.WindDirection = card.WindDirection;
-                    db.Entry(openWeatherCard).State = EntityState.Modified;
+                    forecastCards.Description = card.Description;
+                    forecastCards.Humidity = card.Humidity;
+                    forecastCards.Temperature = card.Temperature;
+                    forecastCards.WindDirection = card.WindDirection;
+                    db.Entry(forecastCards).State = EntityState.Modified;
                 }
             }
             db.SaveChanges();
             //-----
             List<JsonCard> jsonCards = new List<JsonCard>();
-            foreach (var card in openWeatherCards)
+            foreach (var card in forecastCardss)
             {
                 jsonCards.Add(new JsonCard(card));
             }

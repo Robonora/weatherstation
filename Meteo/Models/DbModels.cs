@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Meteo.Models
 {
-    public class OpenWeatherCard
+    public class ForecastCard
     {
         [Key]
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace Meteo.Models
         [Required]
         public string Description { get; set; }
     }
-    public class MeteoStationCard
+    public class HistoryCard
     {
         [Key]
         public int Id { get; set; }
