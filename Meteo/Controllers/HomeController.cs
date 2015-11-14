@@ -15,7 +15,7 @@ namespace Meteo.Controllers
         public ActionResult Index()
         {
 
-            return new EmptyResult();
+            return View();
         }
 
     }
