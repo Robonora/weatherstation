@@ -6,11 +6,11 @@ using Meteo.Models;
 using System.Text.RegularExpressions;
 using System.Globalization;
 
-namespace Meteo.Parse
+namespace Meteo.ExternalData
 {
     public static class ParserMeteoData
     {
-        public static HistoryCard ParseInJson(string data)
+        public static HistoryCard ParseInCard(string data)
         {
             string pattern = @"r:[0-9]+\|t:([0-9]+|[0-9]+\.[0-9]+)\|h:([0-9]+|[0-9]+\.[0-9]+)\|pt:([0-9]+|[0-9]+\.[0-9]+)\|p:([0-9]+|[0-9]+\.[0-9]+)\|g:([0-9]+|[0-9]+\.[0-9]+)=";
             string measurement, field;
@@ -40,6 +40,9 @@ namespace Meteo.Parse
             todayCard.Humidity = (float)Math.Round(todayCard.Humidity / countMeasurement, 2);
             todayCard.Pressure = (float)Math.Round(todayCard.Pressure / countMeasurement, 2);
             todayCard.Radiation = (float)Math.Round(todayCard.Radiation / countMeasurement, 2);
+            todayCard.Description = "-";
+            todayCard.WindDirection = "-";
+            todayCard.WindSpeed = 0;
             return todayCard;
         }
     }

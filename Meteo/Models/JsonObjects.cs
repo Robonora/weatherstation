@@ -71,22 +71,22 @@ namespace Meteo.Models
     public class JsonTodayGraphic
     {
         [JsonProperty]
-        public int Time_hour { get; set; }
+        public int TimeHour { get; set; }
         [JsonProperty]
-        public int Time_min { get; set; }
+        public int TimeMin { get; set; }
         [JsonProperty]
         public int Temperature { get; set; }
 
         public JsonTodayGraphic(ForecastCard card)
         {
-            this.Time_hour = card.DateTime.Hour;
-            this.Time_min = card.DateTime.Minute;
+            this.TimeHour = card.DateTime.Hour;
+            this.TimeMin = card.DateTime.Minute;
             this.Temperature = card.Temperature;
         }
         public JsonTodayGraphic(HistoryCard card)
         {
-            this.Time_hour = card.DateTime.Hour;
-            this.Time_min = card.DateTime.Minute;
+            this.TimeHour = card.DateTime.Hour;
+            this.TimeMin = card.DateTime.Minute;
             this.Temperature = card.Temperature;
         }
     }

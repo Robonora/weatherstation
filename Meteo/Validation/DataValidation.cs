@@ -68,7 +68,7 @@ namespace Meteo.Validation
             switch(windDirection)
             {
                 case "N": return true;
-                case "Ne": return true;
+                case "NE": return true;
                 case "E": return true;
                 case "SE": return true;
                 case "S": return true;

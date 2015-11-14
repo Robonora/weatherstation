@@ -6,9 +6,9 @@ using Meteo.Models;
 using System.Net;
 using Newtonsoft.Json;
 
-namespace Meteo.Parse
+namespace Meteo.ExternalData
 {
-    public static class ParserOpenWeatherData
+    public static class DownloadOpenWeatherData
     {
         public static OpenWeatherJson ParseInJson() 
         {
