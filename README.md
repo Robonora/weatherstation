@@ -1,10 +1,12 @@
 # weatherstation
-Source code for weather station that located on the roof of Chelyabinsk State University.
 
-Source code contains:
+Description
 
-* code for Android app 
-* link to this app - %link will come soon%
-* code for Arduino program
- 
-For more information you can read this arcticle: %link will come soon%
+We've made a weather station that located on the roof of Chelyabinsk State University. 
+Service to show weather near Chelyabinsk, CSU.
+
+Links
+
+- Web service: http://csumeteostation.azurewebsites.net/
+- Github: https://github.com/Robonora/weatherstation
+- Trello: https://trello.com/b/fuQhjjyq/-
