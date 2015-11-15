@@ -7,6 +7,6 @@ Service to show weather near Chelyabinsk, CSU.
 
 Links
 
-- Web service: csumeteostation.azurewebsites.net
-- Github: github.com/Robonora/weatherstation
-- Trello: trello.com/b/fuQhjjyq/
+- Web service: http://csumeteostation.azurewebsites.net/
+- Github: https://github.com/Robonora/weatherstation
+- Trello: https://trello.com/b/fuQhjjyq/-
