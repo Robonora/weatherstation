@@ -10,6 +10,8 @@ namespace Meteo.Validation
     {
         public static bool AllValidation(ForecastCard forecastCard)
         {
+            if (forecastCard == null)
+                return false;
             if (TemperatureValidation(forecastCard.Temperature) &&
                 HumidityValidation(forecastCard.Humidity) &&
                 WindDirectionValidation(forecastCard.WindDirection) &&
@@ -20,6 +22,8 @@ namespace Meteo.Validation
         }
         public static bool AllValidation(HistoryCard historyCard)
         {
+            if (historyCard == null)
+                return false;
             if (TemperatureValidation(historyCard.Temperature) &&
                 HumidityValidation(historyCard.Humidity) &&
                 PressureValidation(historyCard.Pressure) &&
@@ -75,6 +79,7 @@ namespace Meteo.Validation
                 case "SW": return true;
                 case "W": return true;
                 case "NW": return true;
+                case "-": return true;
                 default: return false;
             }
         }
@@ -86,6 +91,7 @@ namespace Meteo.Validation
                 case "Clear": return true;
                 case "Clouds": return true;
                 case "Rain": return true;
+                case "-": return true;
                 default: return false;
             }
         }

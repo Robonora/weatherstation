@@ -8,7 +8,7 @@ namespace Meteo.BusinessLogic
 {
     public static class LogicGetFutureAndPast
     {
-        private static JsonCard CreateDayCard(List<JsonCard> listCards)
+        public static JsonCard CreateDayCard(List<JsonCard> listCards)
         {
             if (listCards.Count != 0)
             {
