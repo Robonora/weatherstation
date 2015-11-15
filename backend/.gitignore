@@ -1,0 +1,4 @@
+# Ignore any  build files.
+Meteo/bin/
+Meteo/obj/
+Meteo/Properties/PublishProfiles
