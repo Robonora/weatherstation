@@ -51,18 +51,10 @@ namespace Meteo.Models
         public string Description { get; set; }
 
         public JsonCard() { }
-        public JsonCard(ForecastCard card) {
+        public JsonCard(Card card) {
             this.Humidity = card.Humidity;
             this.Description = card.Description;
             this.Date = card.DateTime.Day+"."+card.DateTime.Month;
-            this.Temperature = card.Temperature;
-            this.WindDirection = card.WindDirection;
-        }
-        public JsonCard(HistoryCard card)
-        {
-            this.Humidity = card.Humidity;
-            this.Description = card.Description;
-            this.Date = card.DateTime.Day + "." + card.DateTime.Month;
             this.Temperature = card.Temperature;
             this.WindDirection = card.WindDirection;
         }
@@ -77,13 +69,7 @@ namespace Meteo.Models
         [JsonProperty]
         public int Temperature { get; set; }
 
-        public JsonTodayGraphic(ForecastCard card)
-        {
-            this.TimeHour = card.DateTime.Hour;
-            this.TimeMin = card.DateTime.Minute;
-            this.Temperature = card.Temperature;
-        }
-        public JsonTodayGraphic(HistoryCard card)
+        public JsonTodayGraphic(Card card)
         {
             this.TimeHour = card.DateTime.Hour;
             this.TimeMin = card.DateTime.Minute;

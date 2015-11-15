@@ -33,15 +33,15 @@ namespace Meteo.Controllers
             var historyCardsToday = db.HistoryCards
                 .Where(x => 
                 x.DateTime > present)
+                .ToList()
                 .Select(card => new JsonTodayGraphic(card))
                 .ToList();
-
             var forecastCardsToday = db.ForecastCards.Where(x => 
                 x.DateTime > present &&
                 x.DateTime < endPresent)
+                .ToList()
                 .Select(card => new JsonTodayGraphic(card))
                 .ToList();
-
             if (historyCard != null)
             {
                 package.Today = new JsonTodayCard(historyCard);
@@ -54,15 +54,21 @@ namespace Meteo.Controllers
             return Json(package, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult MeteoData(string data)
+        //[HttpPost]
+        public ActionResult MeteoData()//string data)
         {
            //string data = "r:533|t:15.09|h:84.17|pt:19.43|p:983.65|g:10.60=r:470|t:15.08|h:84.22|pt:19.41|p:983.53|g:6.62=r:477|t:15.11|h:84.61|pt:19.41|p:983.61|g:21.19=";  
-            HistoryCard historyCard = ParserMeteoData.ParseInCard(data);
-            historyCard.DateTime = DateTime.Now;
-            if (DataValidation.AllValidation(historyCard))
+            string data = "r:533|t:15.09|h:0|pt:19.43|p:983.65|g:10.60=r:470|t:15.08|h:84.22|pt:19.41|p:983.53|g:6.62=r:477|t:15.11|h:84.61|pt:19.41|p:983.61|g:21.19=";
+
+            if (data != null)
             {
-                db.HistoryCards.Add(historyCard);
-                db.SaveChanges();
+                HistoryCard historyCard = ParserMeteoData.ParseInCard(data);
+                //historyCard.DateTime = DateTime.Now;
+                //if (DataValidation.AllValidation(historyCard))
+                //{
+                //    db.HistoryCards.Add(historyCard);
+                //    db.SaveChanges();
+                //}
             }
             return RedirectToAction("OpenWeatherData");
         } 
@@ -71,27 +77,19 @@ namespace Meteo.Controllers
         {
             DateTime present = DateTime.Now;
             DateTime EndDate = DateTime.Now.AddDays(5);
-            bool flag = true;
-            List<JsonCard> forecastCards = null;
-            while (flag)
-            {
-                forecastCards = db.ForecastCards.Where(x =>
+            var forecastCards = db.ForecastCards.Where(x =>
                     x.DateTime.Day != present.Day &&
                     x.DateTime >= present &&
                     x.DateTime <= EndDate)
+                    .ToList()
                     .Select(card => new JsonCard(card))
                     .ToList();
-                if (forecastCards.Count < 5)
-                {
-                    RedirectToAction("OpenWeatherData");
-                    flag = false;
-                }
-            }
             EndDate = DateTime.Now.AddDays(-5);
             var historyCards = db.HistoryCards.Where(x => 
                 x.DateTime.Day!=present.Day &&
                 x.DateTime <= present && 
                 x.DateTime > EndDate)
+                .ToList()
                 .Select(card => new JsonCard(card))
                 .ToList();
             PackageFutureAndPast package = LogicGetFutureAndPast.CreateEachDayCards(forecastCards,historyCards);

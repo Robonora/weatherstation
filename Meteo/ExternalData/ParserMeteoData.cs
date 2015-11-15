@@ -14,7 +14,7 @@ namespace Meteo.ExternalData
         {
             string pattern = @"r:[0-9]+\|t:([0-9]+|[0-9]+\.[0-9]+)\|h:([0-9]+|[0-9]+\.[0-9]+)\|pt:([0-9]+|[0-9]+\.[0-9]+)\|p:([0-9]+|[0-9]+\.[0-9]+)\|g:([0-9]+|[0-9]+\.[0-9]+)=";
             string measurement, field;
-            int countMeasurement = 0;
+            int countMeasurementTemperature = 0, countMeasurementHumidity = 0, countMeasurementPressure = 0, countMeasurementRadiation = 0;
             HistoryCard todayCard = new HistoryCard() { Temperature = 0, Humidity = 0, Pressure = 0, Radiation = 0 };
             Regex regexPackage = new Regex(pattern);
             Regex regexTemperature = new Regex(@"t:([0-9]+\.[0-9]+|[0-9]+)");
@@ -34,12 +34,16 @@ namespace Meteo.ExternalData
                 field = regexRadiation.Match(measurement).Value.Remove(0, 2);
                 todayCard.Radiation += Convert.ToSingle(field, new CultureInfo("en-US"));
                 match = match.NextMatch();
-                countMeasurement++;
+                countMeasurementHumidity++;
             }
-            todayCard.Temperature /= countMeasurement;
-            todayCard.Humidity = (float)Math.Round(todayCard.Humidity / countMeasurement, 2);
-            todayCard.Pressure = (float)Math.Round(todayCard.Pressure / countMeasurement, 2);
-            todayCard.Radiation = (float)Math.Round(todayCard.Radiation / countMeasurement, 2);
+            todayCard.Temperature /= countMeasurementHumidity;
+            todayCard.Humidity = (float)Math.Round(todayCard.Humidity / countMeasurementHumidity, 2);
+            todayCard.Pressure = (float)Math.Round(todayCard.Pressure / countMeasurementHumidity, 2);
+            todayCard.Radiation = (float)Math.Round(todayCard.Radiation / countMeasurementHumidity, 2);
+            todayCard.Description = "-";
+            todayCard.WindDirection = "-";
+            todayCard.WindSpeed = 0;
+            HistoryCard card = new HistoryCard() { Temperature = 15, Humidity = 84.33f, Pressure = 983.6f, Radiation = 12.8f };
             todayCard.Description = "-";
             todayCard.WindDirection = "-";
             todayCard.WindSpeed = 0;
