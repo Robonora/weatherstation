@@ -22,7 +22,7 @@ namespace Meteo.BusinessLogic
                 foreach (var card in listCards)
                 {
                     day.Humidity += card.Humidity / listCards.Count;
-                    day.Temperature += card.Temperature / listCards.Count;
+                    day.Temperature += card.Temperature;
 
                     count = listCards.Where(x => x.WindDirection == card.WindDirection).ToList().Count;
                     if (count > maxCountWindDirection)
@@ -37,6 +37,7 @@ namespace Meteo.BusinessLogic
                         maxCountDescription = count;
                     }
                 }
+                day.Temperature /= listCards.Count;
                 return day;
             }
             return null;
@@ -44,10 +45,11 @@ namespace Meteo.BusinessLogic
         public static PackageFutureAndPast CreateEachDayCards(List<JsonCard> forecastCards, List<JsonCard> historyCards)
         {
             PackageFutureAndPast package = new PackageFutureAndPast();
+            int countDays = 5;
             DateTime present = DateTime.Now;
             List<JsonCard> listOfFutureAndPastCards = new List<JsonCard>();
-            listOfFutureAndPastCards=forecastCards.Concat(historyCards).ToList();
-            for (var counter = 0; counter < 5; counter++)
+            listOfFutureAndPastCards = forecastCards.Concat(historyCards).ToList();
+            for (var counter = 0; counter <countDays; counter++)
             {
                 JsonCard card = CreateDayCard(listOfFutureAndPastCards.Where(x => 
                     x.Date == (present.AddDays(counter + 1).Day + "." + present.Month))
