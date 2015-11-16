@@ -2,6 +2,8 @@
 <html lang="en" >
  <head>
   	<title>Meteo</title>
+	<link rel="icon" href="img/charact/Clear.png" />
+	 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
    
@@ -22,7 +24,9 @@
 
 	<script  type="text/javascript" src="js/bootstrap.min.js"></script>
 
-	<script src="js/my_script_card.js"></script>
+	<script src="js/MainScript.js"></script>
+	<script src="js/UpdateData.js"></script>
+	<script src="js/Canvas.js"></script>
 	
 	<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 
@@ -33,34 +37,34 @@
 	 <div class="container-fluid main">
 		<div class="row">
 
-			<div class="col-md-4 col-md-push-4 TheMainCard" id="currently" style="XXXpadding: 0 15px;" ng-controller = "Today">
+			<div class="col-md-4 col-md-push-4 TheMainCard" id="currently" style="XXXpadding: 0 15px;" ng-controller = "CanvaCTRL">
 				<div>
-					<h2 id="cur-top-title" class="header">{{today.charact}} {{today.temperature}}</h2>
+					<h2 id="cur-top-title" class="header">{{today.Description}} {{today.Temperature}}</h2>
 				</div>
 
 				<div class="mCustomScrollbar scrolling" data-mcs-theme="minimal-dark">
 
 					<div id="cur-top" class="MainPic">
-						<img ng-src="{{'img/osn/' + today.img + '.png'}}" height="100%"/>
+						<img ng-src="{{'img/osn/' + today.Description + '.png'}}" height="100%"/>
 					</div>
 
-					<div ng-controller = "CanvaCTRL"><canvas id="weather" ></canvas></div>
+					<div><canvas id="weather" ></canvas></div>
 
 					<div class="InfoTable">
 						<div class="hidden-xs" style="display: inline-block; position: relative; XXXfloat: left; width: 31%; margin: 15px 0 15px 60px;">
-							<img src="img/descr/humidity.png" style="width: 80px; position: absolute; top: -15px; left: -70px;"/><span style="font-size: 20px;">{{today.air}}%</span><br>Влажность
+							<img src="img/descr/humidity.png" style="width: 80px; position: absolute; top: -15px; left: -70px;"/><span style="font-size: 20px;">{{today.Humidity}}%</span><br>Влажность
 						</div>
 
 						<div class="hidden-xs" style="display: inline-block; position: relative; XXXfloat: left; width: 31%; margin: 15px 0 15px 60px;">
-							<img src="img/descr/wind.png" style="width: 80px; position: absolute; top: -15px; left: -70px;"/><span style="font-size: 20px;">{{today.wind_power}}</span> м/с {{today.wind_direction}}<br>Ветер 
+							<img src="img/descr/wind.png" style="width: 80px; position: absolute; top: -15px; left: -70px;"/><span style="font-size: 20px;">{{today.WindSpeed}}</span> м/с {{today.WindDirection}}<br>Ветер 
 						</div>
 
 						<div style="display: inline-block; position: relative; XXXfloat: left; width: 31%; margin: 15px 0 15px 60px;">
-							<img src="img/descr/barometr.png" style="width: 80px; position: absolute; top: -15px; left: -70px;"/><span style="font-size: 20px;">{{today.pressure}}</span> мм рт. ст.<br>Давление
+							<img src="img/descr/barometr.png" style="width: 80px; position: absolute; top: -15px; left: -70px;"/><span style="font-size: 20px;">{{today.Pressure}}</span> мм рт. ст.<br>Давление
 						</div>
 
 						<div style="display: inline-block; position: relative; XXXfloat: left; width: 31%; margin: 15px 0 15px 60px;">
-							<img src="img/descr/hazard.png" style="width: 80px; position: absolute; top: -15px; left: -70px;"/><span style="font-size: 20px;">{{today.radiation}}</span> мкр.ч.<br>Радиация
+							<img src="img/descr/hazard.png" style="width: 80px; position: absolute; top: -15px; left: -70px;"/><span style="font-size: 20px;">{{today.Radiation}}</span> мкр.ч.<br>Радиация
 						</div>
 					</div> <!--InfoTable-->
 				</div> <!--Скроллируемая область-->
@@ -100,6 +104,16 @@
 			</div>
 		</div>
 	</div>
+<!-- Google analytic counter -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-70107686-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>
