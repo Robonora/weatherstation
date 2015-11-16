@@ -1,0 +1,24 @@
+<div class="weatherCard" >
+	<div class="row" style="padding: 0px 15px">
+		<div class="col-md-4 col-xs-4 timeBlock" >
+			<div class="time" >12:00</div>
+			<div class="day" >{{day.day}}</div>
+			<div>{{day.month}}</div>
+		</div>
+		<div class="col-md-8 col-xs-8 colom" >
+			<div class="elementOfWeather">
+				<img src="img/descr/temperature.png" class="pic"/> Температура: {{day.Temperature}}
+			</div>
+			<div class="elementOfWeather">
+				<img ng-src="{{'img/charact/'+day.Description+'.png'}}" class="pic"/>Характеристика
+			</div>
+			<div class="elementOfWeather">
+				<img src="img/descr/wind.png" class="pic"/>Ветер: {{day.WindDirection}}
+			</div>
+			<!--<div>Ветер: <img class="media-object" ng-src="{{'img/wind/'+day.wind+'.png'}}"  width="30px" /></div>-->
+			<div class="elementOfWeather">
+				<img src="img/descr/humidity.png" class="pic"/>Влажность: {{day.Humidity}}%
+			</div>
+		</div>
+	</div>
+</div>	
